@@ -1,5 +1,7 @@
 <script>
+  import NavigationBar from "./Components/NavigationBar.svelte";
   import Editor from "./Editor.svelte";
+  import LandingPage from "./LandingPage.svelte";
 </script>
 
 <style>
@@ -9,5 +11,9 @@
 </style>
 
 <main>
-  <Editor />
+  <NavigationBar showContent={false} />
+  <LandingPage />
+
+  <!-- <NavigationBar/> -->
+  <!-- <Editor/> -->
 </main>

@@ -1,57 +1,50 @@
 <script>
-  import NavigationBar from "./NavigationBar.svelte";
-  import PrimaryButton from "./PrimaryButton.svelte";
-  import { swift } from "svelte-highlight/languages";
-  import marked from "marked";
-  import hljs from "highlight.js";
+  import PrimaryButton from "./Components/PrimaryButton.svelte";
+  import InfoText from "./Components/InfoText.svelte";
   import { github } from "svelte-highlight/styles";
+  import { editorState } from "./stores.js";
 
-  marked.setOptions({
-    highlight: function(code) {
-      return hljs.highlightAuto(code).value;
-    }
-  });
-
-let markdownSource = `## Testing
-  
-Let's try some stuff
-
-\`\`\`
-struct X {
-  let x: Int
-  let y: Int
-
-  func abc() -> Int {
-    return x + y
-  }
-}
-\`\`\`
-  `;
-
-$: htmlOutput = marked(markdownSource);
-$: publishButtonDisabled = markdownSource.length == 0;
+  const {
+    markdownDraft,
+    markdownHTMLOutput,
+    publishButtonEnabled
+  } = editorState;
 </script>
 
 <style>
-  .view-description {
-    margin: 3px;
-    padding: 5px 10px;
-    font-size: 0.7em;
-    text-transform: lowercase;
-    text-align: right;
-    color: #afbac3;
+  textarea {
+    background-color: transparent;
+    color: #080808;
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9em;
+    padding-left: 10px;
   }
+
+  textarea:focus {
+    outline: none;
+  }
+
+  .bottom-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   .container {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
   }
-  .bottom-bar {
+
+  .output {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    padding: 0 1.5em;
+    font-family: "Roboto", sans-serif;
   }
 
   .left-container,
@@ -65,26 +58,9 @@ $: publishButtonDisabled = markdownSource.length == 0;
     box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #b3b3b3;
     margin: 5px;
   }
+
   .right-container {
     overflow: auto;
-  }
-  textarea {
-    background-color: transparent;
-    color: #080808;
-    border: none;
-    width: 100%;
-    height: 100%;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.9em;
-    padding-left: 10px;
-  }
-  textarea:focus {
-    outline: none;
-  }
-  .html-output {
-    width: 100%;
-    padding: 0 1.5em;
-    font-family: "Roboto", sans-serif;
   }
 </style>
 
@@ -95,19 +71,22 @@ $: publishButtonDisabled = markdownSource.length == 0;
   {@html github}
 </svelte:head>
 
-<NavigationBar/>
 <div class="container">
+
   <div class="left-container">
-    <p class="view-description">Markdown editor</p>
-    <textarea bind:value={markdownSource} />
+    <InfoText text="Markdown editor" />
+    <textarea bind:value={$markdownDraft} />
   </div>
+
   <div class="right-container">
-    <p class="view-description">Webpage output</p>
-    <div class="html-output">
-      {@html htmlOutput}
+    <InfoText text="Webpage output" />
+    <div class="output">
+      {@html $markdownHTMLOutput}
     </div>
   </div>
+
 </div>
+
 <div class="bottom-bar">
-  <PrimaryButton text="Publish" disabled={publishButtonDisabled} />
+  <PrimaryButton text="Publish" disabled={!$publishButtonEnabled} />
 </div>

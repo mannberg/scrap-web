@@ -1,5 +1,7 @@
 <script>
   import SecondaryButton from "./SecondaryButton.svelte";
+  
+  export let showContent = true;
 </script>
 
 <style>
@@ -8,34 +10,44 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .left,
+  .center,
   .right {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
   }
+
+  .left {
+    justify-content: flex-start;
+  }
+  
   .center {
-    width: 100%;
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
-  .left {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+
+  .right {
+    justify-content: flex-end;
   }
 </style>
 
 <main>
+
   <div class="left">
-    <SecondaryButton text="Profile" />
+    {#if showContent}
+      <SecondaryButton text="Profile" />
+    {/if}
   </div>
+
   <div class="center">
     <span>SCRAP</span>
   </div>
+
   <div class="right">
-    <SecondaryButton text="Change theme" />
+    {#if showContent}
+      <SecondaryButton text="Change theme" />
+    {/if}
   </div>
+
 </main>
