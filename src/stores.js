@@ -35,3 +35,8 @@ export const editorState = {
     markdownHTMLOutput,
     publishButtonEnabled
 };
+
+export const appState = {
+    ...landingPageState,
+    ...editorState
+}

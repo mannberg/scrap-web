@@ -2,6 +2,8 @@
   import NavigationBar from "./Components/NavigationBar.svelte";
   import Editor from "./Editor.svelte";
   import LandingPage from "./LandingPage.svelte";
+  import { landingPageState } from "./stores.js";
+
 </script>
 
 <style>
@@ -12,7 +14,7 @@
 
 <main>
   <NavigationBar showContent={false} />
-  <LandingPage />
+  <LandingPage state={ landingPageState }/>
 
   <!-- <NavigationBar/> -->
   <!-- <Editor/> -->

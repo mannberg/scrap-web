@@ -1,13 +1,14 @@
 <script>
   import PrimaryButton from "./Components/PrimaryButton.svelte";
   import InfoText from "./Components/InfoText.svelte";
-  import { landingPageState } from "./stores.js";
+
+  export let state;
 
   const { 
     title, 
     username, 
     password, 
-    loginButtonEnabled } = landingPageState;
+    loginButtonEnabled } = state;
 </script>
 
 <style>
@@ -57,12 +58,12 @@
   <!-- TODO: Make component if current design stays -->
   <div class="label-and-input">
     <InfoText text="Email address" />
-    <input bind:value={$username} />
+    <input data-testid="username" bind:value={$username} />
   </div>
 
   <div class="label-and-input">
     <InfoText leftAligned text="Password" />
-    <input type="password" bind:value={$password} />
+    <input data-testid="password" type="password" bind:value={$password} />
   </div>
 
   <PrimaryButton leftAligned text="Login" disabled={!$loginButtonEnabled} />

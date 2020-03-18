@@ -1,19 +1,31 @@
 {
   "name": "scrap",
+  "jest": {
+    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
+  },
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/svelte": "^3.0.0",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "jest-transform-svelte": "^2.1.1",
     "rollup": "^1.20.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-jester": "^1.0.5"
   },
   "dependencies": {
     "marked": "^0.8.0",
