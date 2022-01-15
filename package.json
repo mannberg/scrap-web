@@ -28,7 +28,7 @@
     "svelte-jester": "^1.0.5"
   },
   "dependencies": {
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "sirv-cli": "^0.4.4",
     "svelte-highlight": "^0.4.1"
   }
